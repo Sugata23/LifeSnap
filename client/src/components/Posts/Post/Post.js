@@ -5,7 +5,8 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import moment from 'moment'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { deletePost, likePost } from '../../../actions/posts'
+//import { useHistory } from 'react-router-dom'
 import useStyles from './styles'
 
 const Post = ({ post, setCurrentId }) => {
@@ -30,14 +31,13 @@ const Post = ({ post, setCurrentId }) => {
                 <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary" ><ThumbUpAltIcon fontSize="small" /> Like {post.likeCount} </Button>
-                <Button size="small" color="primary" ><DeleteIcon fontSize="small" /> Delete</Button>
+                <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))} ><ThumbUpAltIcon fontSize="small" /> &nbsp; Like &nbsp; {post.likeCount} </Button>
+                <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))} ><DeleteIcon fontSize="small" /> Delete</Button>
             </CardActions>
         </Card>
     );
 };
-//onClick={() => dispatch(deletePost(post._id))} 
+
 //onClick={() => history.push(`/posts/${post._id}`)}
-//onClick={() => dispatch(likePost(post._id))}
 
 export default Post
